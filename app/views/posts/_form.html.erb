@@ -1,0 +1,5 @@
+<%= simple_form_for(Post.new) do |f| %>
+  <%= f.input :title, label: "Enter Title" %>
+  <%= f.input :body, label: "Enter Text" %>
+  <%= f.button :submit %>
+<% end %>
