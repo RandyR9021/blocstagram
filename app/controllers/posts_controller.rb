@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
     @posts = Post.all.order("created_at DESC")
   end
@@ -7,20 +9,18 @@ class PostsController < ApplicationController
     @posts = Post.find(params[:id])
   end
 
+  def new
+    @post = Post.new(post_params)
+  end
+
   def create
-    @posts = Post.new(post_params)
+    @post = Post.new(post_params)
     if @post.save
       redirect_to @post, notice: "Post was saved successfully."
     else
       flash[:error] = "There was an error saving your Post. Please try again."
       render :new
     end
-  end
-
-  end
-
-  def new
-    @post = Post.new(post_params)
   end
 
   def update
@@ -34,6 +34,11 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params
-    params.require(:post).permit(:title, :body,:image)
+  def set_post
+    @post = Post.find(params[:id])
   end
+
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
+end
