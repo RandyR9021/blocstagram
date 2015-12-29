@@ -10,11 +10,11 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new(post_params)
+    @post = Post.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(params.require(:post).permit(:title, :body))
     if @post.save
       redirect_to @post, notice: "Post was saved successfully."
     else
@@ -24,9 +24,11 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def destroy
