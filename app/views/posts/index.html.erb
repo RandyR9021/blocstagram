@@ -1,0 +1,23 @@
+<h1>Posts</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <% @posts.each do |posts| %>
+     <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to post.title %>
+        </h4>
+        <small>
+          <%= post.body %>
+        </small>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="col-md-4">
+  <% if policy(Post.new).create? %>
+  <%= link_to "New Post", new_post_path, class: 'btn btn-succes' %>
+  <% end %>
+</div>
+</div>
