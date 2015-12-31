@@ -6,9 +6,10 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <div class="container">
-    <u1 class="nav nav-tabs">
+<body class="Home">
+  <header>
+  <div class="nav">
+    <u1>
       <li><%= link_to "Blocstagram", root_path %></li>
       <li><%= link_to "New Post", new_post_path %></li>
       <% if flash[:notice] %>

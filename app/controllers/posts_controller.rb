@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params.require(:post).permit(:title, :body))
+    @post = Post.new(params.require(:post).permit(:title, :body, :image))
     if @post.save
       redirect_to @post, notice: "Post was saved successfully."
     else
@@ -32,6 +32,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:notice] = "Post was successfully deleted."
+    else
+      flash[:error] = "Post could not be deleted. Please try again."
+    end
   end
 
   private
@@ -41,6 +47,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :image)
   end
 end
